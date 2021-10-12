@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Favorite 5 Page</h1>
+
+<!-- <p>{{ artists }}</p> -->
+
+<p>Here are my favorite 5 artists:</p>
+<ul>
+    {% for a in artists %}
+        {% if a == 'Bonobo' %}
+            <li>{{ a.upper() }}</li>
+        {% else %}
+            <li>{{ a }}</li>
+        {% endif %}     
+    {% endfor %}    
+</ul>
+
+{% endblock %}
