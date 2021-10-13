@@ -11,9 +11,16 @@ class UserInfoForm(FlaskForm):
     submit = SubmitField('Register')
 
 
+class PostForm(FlaskForm):
+    title = StringField('Title', validators=[DataRequired()])
+    content = StringField('Content', validators=[DataRequired(), Email()])
+    submit = SubmitField('Submit')
+
+
 class PhonebookForm(FlaskForm):
     first_name = StringField('First Name', validators=[DataRequired()])
     last_name = StringField('Last Name', validators=[DataRequired()])
     phone_number = StringField('Phone Number', validators=[DataRequired()])
+    address = StringField('Address', validators=[DataRequired()])
     submit_number = SubmitField('Submit')
 
