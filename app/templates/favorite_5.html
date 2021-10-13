@@ -10,7 +10,7 @@
 <ul>
     {% for a in artists %}
         {% if a == 'Bonobo' %}
-            <li>{{ a.upper() }}</li>
+            <li>{{ a.title() }}</li>
         {% else %}
             <li>{{ a }}</li>
         {% endif %}     

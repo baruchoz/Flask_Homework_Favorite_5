@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h4>Register Phone Number:</h4>
+<form action="" method='post'>
+    {{ phonebook_form.csrf_token }}
+    <div class="form-group">
+        <fieldset>
+            {{ phonebook_form.first_name.label }}
+            {{ phonebook_form.first_name(class='form-control', placeholder='First Name') }}
+        </fieldset>
+        <fieldset>
+            {{ phonebook_form.last_name.label }}
+            {{ phonebook_form.last_name(class='form-control', placeholder='Last Name') }}
+        </fieldset>
+        <fieldset>
+            {{ phonebook_form.phone_number.label }}
+            {{ phonebook_form.phone_number(class='form-control', placeholder='Phone Number') }}
+        </fieldset>
+        {{ phonebook_form.submit_number(class='btn btn-secondary') }}
+    </div>
+</form>
+
+
+{% endblock %}
