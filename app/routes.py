@@ -1,24 +1,22 @@
 from app import app
 from flask import render_template, redirect, url_for, flash
-from flask_login import login_user ,logout_user
+from flask_login import login_user ,logout_user, current_user, login_required
 from app.forms import LoginForm, PostForm, UserInfoForm, PhonebookForm, LoginForm
 from app.models import Post, Phonebook, User
 from app import db
 
 
-
 @app.route('/') 
 def index():
     title = 'Blog Homepage'
-
-    return render_template('index.html', title=title)
+    posts = Post.query.all()
+    return render_template('index.html', title=title, posts=posts)
 
 
 @app.route('/favorite_5') 
 def artists():
     title = 'Favorite 5'
     artists = ['Odesza', 'Flume', 'Bonobo', 'Porter Robinson', 'Louis The Child']
-
     return render_template('favorite_5.html', title=title, artists=artists)
 
 
@@ -73,6 +71,7 @@ def login():
         login_user(user)
 
         flash(f'Welcome {user.username}. You have successfully logged in.', 'success')
+
         return redirect(url_for('index'))
 
     return render_template('login.html', title=title, login_form=form)
@@ -95,25 +94,25 @@ def Register_Phone_Number():
         phone_number = register_phone_form.phone_number.data
         address = register_phone_form.address.data
         print(first_name, last_name, phone_number, address)
-        
         new_phonebook = Phonebook(first_name, last_name, phone_number, address)
-
         db.session.add(new_phonebook)
         db.session.commit()
-
     return render_template('register_phone_number.html', title=title, phonebook_form=register_phone_form)
 
+
 @app.route('/createpost', methods=['GET', 'POST'])
+@login_required
 def createpost():
     title = 'Create Post'
     form = PostForm()
     if form.validate_on_submit():
+        print('Hello')
         title = form.title.data
         content = form.content.data
-
-        new_post = Post(title, content, user_id=1)
-
+        new_post = Post(title, content, current_user.id)
         db.session.add(new_post)
         db.session.commit()
 
+        flash(f'The post {title} has been created.', 'primary')
+        return redirect(url_for('index'))
     return render_template('createpost.html', title=title, form=form)
