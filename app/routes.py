@@ -1,15 +1,15 @@
-from app import app
+from app import app, db
 from flask import render_template, redirect, url_for, flash
 from flask_login import login_user ,logout_user, current_user, login_required
-from app.forms import LoginForm, PostForm, UserInfoForm, PhonebookForm, LoginForm
-from app.models import Post, Phonebook, User
-from app import db
+from app.forms import UserInfoForm, PostForm, LoginForm, PhonebookForm
+from app.models import User, Post, Phonebook
 
 
 @app.route('/') 
 def index():
     title = 'Blog Homepage'
     posts = Post.query.all()
+    
     return render_template('index.html', title=title, posts=posts)
 
 
@@ -19,6 +19,37 @@ def artists():
     artists = ['Odesza', 'Flume', 'Bonobo', 'Porter Robinson', 'Louis The Child']
     return render_template('favorite_5.html', title=title, artists=artists)
 
+
+@app.route('/register_phone_number', methods=['GET', 'POST'])
+@login_required
+def Register_Phone_Number():
+    title = 'Phonebook'
+    register_phone_form = PhonebookForm()
+    if register_phone_form.validate_on_submit():
+        first_name = register_phone_form.first_name.data
+        last_name = register_phone_form.last_name.data
+        phone_number = register_phone_form.phone_number.data
+        address = register_phone_form.address.data
+        print(first_name, last_name, phone_number, address)
+
+        new_phonebook = Phonebook(first_name, last_name, phone_number, address)
+        
+        db.session.add(new_phonebook)
+        db.session.commit()
+
+        flash(f'Thank you {first_name}, you have successfully registered your info in the phonebook!', 'success')
+        # Redirecting to the home page
+        return redirect(url_for('phonebook'))
+
+    return render_template('register_phone_number.html', title=title, phonebook_form=register_phone_form)
+
+
+@app.route('/phonebook')
+@login_required
+def phonebook():
+    phonebooks = Phonebook.query.all()
+
+    return render_template('phonebook.html', phonebooks=phonebooks)
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -56,7 +87,6 @@ def login():
     title= 'Login'
     form = LoginForm()
     if form.validate_on_submit():
-        # Grab data from form
         username = form.username.data
         password = form.password.data
 
@@ -83,23 +113,6 @@ def logout():
     return redirect(url_for('index'))
 
 
-@app.route('/register_phone_number', methods=['GET', 'POST'])
-def Register_Phone_Number():
-    title = 'Phonebook'
-    register_phone_form = PhonebookForm()
-    if register_phone_form.validate_on_submit():
-        print(('Hello this phonebook form has been submitted correctly'))
-        first_name = register_phone_form.first_name.data
-        last_name = register_phone_form.last_name.data
-        phone_number = register_phone_form.phone_number.data
-        address = register_phone_form.address.data
-        print(first_name, last_name, phone_number, address)
-        new_phonebook = Phonebook(first_name, last_name, phone_number, address)
-        db.session.add(new_phonebook)
-        db.session.commit()
-    return render_template('register_phone_number.html', title=title, phonebook_form=register_phone_form)
-
-
 @app.route('/createpost', methods=['GET', 'POST'])
 @login_required
 def createpost():
@@ -115,4 +128,5 @@ def createpost():
 
         flash(f'The post {title} has been created.', 'primary')
         return redirect(url_for('index'))
+
     return render_template('createpost.html', title=title, form=form)

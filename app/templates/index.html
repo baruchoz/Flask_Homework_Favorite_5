@@ -3,9 +3,12 @@
 {% block content %}
 
 <h1>Blog Homepage</h1>
-<h4>Welcome {{ current_user.username }}</h4>
+<h3>Welcome {{ current_user.username }}!</h3>
+<br>
 
+<h4>Your Blog!</h4>
 {% for p in posts %}
+    <br>
     <div class="card bg-light text-dark">
         <div class="card-header">
         {{ p.title }}
@@ -18,8 +21,8 @@
                 </cite></footer>
             </blockquote>
         </div>
-    </div>
-    
+    </div>   
 {% endfor %}
+
 
 {% endblock %}

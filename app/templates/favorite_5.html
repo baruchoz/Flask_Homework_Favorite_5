@@ -7,7 +7,7 @@
 <!-- <p>{{ artists }}</p> -->
 
 <p>Here are my favorite 5 artists:</p>
-<ul>
+<!-- <ol>
     {% for a in artists %}
         {% if a == 'Bonobo' %}
             <li>{{ a.title() }}</li>
@@ -15,6 +15,72 @@
             <li>{{ a }}</li>
         {% endif %}     
     {% endfor %}    
-</ul>
-
-{% endblock %}
+</ol> -->
+<div class="row">
+    <div class="col">
+        <div class="card" style="width: 14rem;">
+            <img class="card-img-top" src="https://pbs.twimg.com/profile_images/1067844952871170048/VFoo8fem.jpg" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title text-dark">Odesza</h5>
+                <p class="card-text text-dark">Odesza is an American electronic music duo originating from Bellingham, Washington. It consists of Harrison Mills and Clayton Knight, known individually as Catacombkid and BeachesBeaches. They formed in 2012, shortly before Mills and Knight graduated from Western Washington University.</p>
+            </div>
+            <div class="card-body">
+                <a href="https://odesza.com/" class="card-link">Artist Page</a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col">       
+        <div class="card" style="width: 14rem;">
+            <img class="card-img-top" src="https://pbs.twimg.com/profile_images/1108102759960633344/twEisRlu.png" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title text-dark">Flume</h5>
+                <p class="card-text text-dark">Harley Edward Streten, known professionally as Flume, is an Australian musician, DJ and record producer. His self-titled debut studio album, Flume, was released on 9 November 2012 to positive reviews, topping the ARIA Albums Chart and reaching double-platinum accreditation in Australia.</p>
+            </div>
+            <div class="card-body">
+                <a href="https://flumemusic.com/" class="card-link">Artist Page</a>
+            </div>
+        </div>
+    </div>
+        
+    <div class="col">
+        <div class="card" style="width: 14rem;">
+            <img class="card-img-top" src="https://ninjatune.net/images/artists/bonobo-main.jpg" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title text-dark">Bonobo</h5>
+                <p class="card-text text-dark">Simon Green, known by his stage name Bonobo, is a British musician, producer, and DJ based in Los Angeles. He debuted with a trip hop aesthetic, and has since explored more upbeat approaches as well as jazz and world music influences. <br> <br> <br> <br></p>
+            </div>
+            <div class="card-body">
+                <a href="https://bonobomusic.com/" class="card-link">Artist Page</a>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card" style="width: 14rem;">
+            <img class="card-img-top" src="https://edm.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTY0ODQ2Nzg0NDkxODI0MjIz/porter-robinson-blonde.jpg" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title text-dark">Porter Robinson</h5>
+                <p class="card-text text-dark">Porter Weston Robinson is an American DJ, record producer, musician, and singer from Chapel Hill, North Carolina. Robinson began producing music in his childhood. He signed to Skrillex's record label OWSLA at the age of 18, and released the extended play Spitfire in 2010. <br> <br></p>
+            </div>
+            <div class="card-body">
+                <a href="https://www.porterrobinson.com/" class="card-link">Artist Page</a>
+            </div>
+        </div>
+    </div>
+    <br>    
+    <div class="col">
+        <div class="card" style="width: 14rem;">
+            <img class="card-img-top" src="https://venueeventartist.com/imateq/event/446/650556/662676/1000SC0/670153.png" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title text-dark">Louis the Child</h5>
+                <p class="card-text text-dark">Louis the Child is an electronic music group consisting of Robby Hauldren and Frederic J. Kennett. They are from Winnetka, Illinois.  <br> <br> <br> <br> <br> <br> <br> <br></p>
+            </div>
+            <div class="card-body">
+                <a href="http://www.louisthechild.com/" class="card-link">Artist Page</a>
+            </div>
+        </div>
+    </div>    
+</div>
+    
+    
+    {% endblock %}
