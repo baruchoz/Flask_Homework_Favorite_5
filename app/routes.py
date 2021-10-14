@@ -23,7 +23,7 @@ def artists():
 @app.route('/register_phone_number', methods=['GET', 'POST'])
 @login_required
 def Register_Phone_Number():
-    title = 'Phonebook'
+    title = 'Register Phonebook'
     register_phone_form = PhonebookForm()
     if register_phone_form.validate_on_submit():
         first_name = register_phone_form.first_name.data
@@ -47,9 +47,10 @@ def Register_Phone_Number():
 @app.route('/phonebook')
 @login_required
 def phonebook():
+    title = 'Phonebook'
     phonebooks = Phonebook.query.all()
 
-    return render_template('phonebook.html', phonebooks=phonebooks)
+    return render_template('phonebook.html',title=title, phonebooks=phonebooks)
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
