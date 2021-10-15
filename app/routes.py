@@ -20,6 +20,15 @@ def artists():
     return render_template('favorite_5.html', title=title, artists=artists)
 
 
+@app.route('/phonebook')
+@login_required
+def phonebook():
+    title = 'Phonebook'
+    phonebooks = Phonebook.query.all()
+
+    return render_template('phonebook.html',title=title, phonebooks=phonebooks)
+
+
 @app.route('/register_phone_number', methods=['GET', 'POST'])
 @login_required
 def Register_Phone_Number():
@@ -43,14 +52,6 @@ def Register_Phone_Number():
 
     return render_template('register_phone_number.html', title=title, phonebook_form=register_phone_form)
 
-
-@app.route('/phonebook')
-@login_required
-def phonebook():
-    title = 'Phonebook'
-    phonebooks = Phonebook.query.all()
-
-    return render_template('phonebook.html',title=title, phonebooks=phonebooks)
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():

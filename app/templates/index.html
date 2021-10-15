@@ -3,7 +3,12 @@
 {% block content %}
 
 <h1>Blog Homepage</h1>
-<h3>Welcome {{ current_user.username }}!</h3>
+
+{% if current_user.is_authenticated %}
+    <h3>Welcome {{ current_user.username }}!</h3>
+{% else %} 
+    <h4>Welcome, please register using the link at the top if you would like to create your own posts</h4>
+{% endif %}    
 <br>
 
 <h4>Your Blog!</h4>
