@@ -11,18 +11,18 @@ class UserInfoForm(FlaskForm):
     submit = SubmitField('Register')
 
 
-class PostForm(FlaskForm):
-    title = StringField('Title', validators=[DataRequired()])
-    content = StringField('Content', validators=[DataRequired()])
-    submit = SubmitField('Submit')
+# class PostForm(FlaskForm):
+#     title = StringField('Title', validators=[DataRequired()])
+#     content = StringField('Content', validators=[DataRequired()])
+#     submit = SubmitField('Submit')
 
 
-class PhonebookForm(FlaskForm):
-    first_name = StringField('First Name', validators=[DataRequired()])
-    last_name = StringField('Last Name', validators=[DataRequired()])
-    phone_number = StringField('Phone Number', validators=[Regexp(r'\d{3}-\d{3}-\d{4}')])
-    address = StringField('Address', validators=[DataRequired()])
-    submit_number = SubmitField('Submit')
+# class PhonebookForm(FlaskForm):
+#     first_name = StringField('First Name', validators=[DataRequired()])
+#     last_name = StringField('Last Name', validators=[DataRequired()])
+#     phone_number = StringField('Phone Number', validators=[Regexp(r'\d{3}-\d{3}-\d{4}')])
+#     address = StringField('Address', validators=[DataRequired()])
+#     submit_number = SubmitField('Submit')
 
 class LoginForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
