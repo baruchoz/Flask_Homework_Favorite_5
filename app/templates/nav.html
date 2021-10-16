@@ -1,6 +1,10 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
-      <a class="navbar-brand " href="/">Baruchs Blog</a>
+
+      <a class="navbar-brand" href="/">
+        <img src="https://www.thathashtagshow.com/wp-content/uploads/2021/06/icon-mmpr-cover.jpg" width="130" height="65" class="d-inline-block align-top" alt="">
+      </a>
+  
       <button class="navbar-toggler " type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -11,17 +15,17 @@
           </li>
           {% if current_user.is_authenticated %}
           <li class="nav-item">
-            <a class="nav-link" href="/favorite_5">Favorite 5</a>
+            <a class="nav-link" href="/cart">Your Cart</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/phonebook">Phonebook</a>
+            <a class="nav-link" href="/rangers">Rangers</a>
           </li>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a class="nav-link" href="/register_phone_number">Create Phonebook</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/createpost">Create Post</a>
-          </li>
+          </li> -->
           {% else %}
           <li class="nav-item">
             <a class="nav-link" href="/register">Register</a>
@@ -37,8 +41,7 @@
               Menu
             </a>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="#">Action</a></li>
-              <li><a class="dropdown-item" href="#">Another action</a></li>
+              <li><a class="dropdown-item" href="/my_account">My Account</a></li>
               <li><hr class="dropdown-divider"></li>
               <li><a class="dropdown-item" href="/logout">Logout</a></li>
             </ul>

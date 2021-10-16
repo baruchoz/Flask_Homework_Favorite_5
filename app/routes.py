@@ -1,56 +1,88 @@
+from sqlalchemy.orm import session
 from app import app, db
-from flask import render_template, redirect, url_for, flash
+from flask import render_template, redirect, url_for, flash, session
 from flask_login import login_user ,logout_user, current_user, login_required
-from app.forms import UserInfoForm, PostForm, LoginForm, PhonebookForm
-from app.models import User, Post, Phonebook
+from app.forms import AddItem, Ranger, UserInfoForm, LoginForm
+from app.models import User, Item, Cart
 
 
 @app.route('/') 
 def index():
-    title = 'Blog Homepage'
-    posts = Post.query.all()
+    title = 'Power Programmer Home'
+    # posts = Post.query.all()
     
-    return render_template('index.html', title=title, posts=posts)
+    return render_template('index.html', title=title )
 
 
-@app.route('/favorite_5') 
-def artists():
-    title = 'Favorite 5'
-    artists = ['Odesza', 'Flume', 'Bonobo', 'Porter Robinson', 'Louis The Child']
-    return render_template('favorite_5.html', title=title, artists=artists)
+# @app.route('/cart')
+# @login_required 
+# def cart():
+    title = 'Cart'
+    
+    return render_template('cart.html', title=title)
 
 
-@app.route('/phonebook')
-@login_required
-def phonebook():
-    title = 'Phonebook'
-    phonebooks = Phonebook.query.all()
+@app.route('/my_account') 
+@login_required 
+def my_account():     
+    title = 'My Account'
 
-    return render_template('phonebook.html',title=title, phonebooks=phonebooks)
+    return render_template('my_account.html', title=title)
 
 
-@app.route('/register_phone_number', methods=['GET', 'POST'])
-@login_required
-def Register_Phone_Number():
-    title = 'Register Phonebook'
-    register_phone_form = PhonebookForm()
-    if register_phone_form.validate_on_submit():
-        first_name = register_phone_form.first_name.data
-        last_name = register_phone_form.last_name.data
-        phone_number = register_phone_form.phone_number.data
-        address = register_phone_form.address.data
-        print(first_name, last_name, phone_number, address)
+@app.route('/red_ranger')
+def red_ranger():
+    title = 'Red Ranger Product Page'
 
-        new_phonebook = Phonebook(first_name, last_name, phone_number, address)
-        
-        db.session.add(new_phonebook)
-        db.session.commit()
+    return render_template('red_ranger.html', title=title)
 
-        flash(f'Thank you {first_name}, you have successfully registered your info in the phonebook!', 'success')
-        # Redirecting to the home page
-        return redirect(url_for('phonebook'))
 
-    return render_template('register_phone_number.html', title=title, phonebook_form=register_phone_form)
+@app.route('/blue_ranger')
+def blue_ranger():
+    title = 'Blue Ranger Product Page'
+
+    return render_template('blue_ranger.html', title=title)
+
+
+@app.route('/green_ranger')
+def green_ranger():
+    title = 'Green Ranger Product Page'
+
+    return render_template('green_ranger.html', title=title)    
+
+@app.route('/pink_ranger')
+def pink_ranger():
+    title = 'Pink Ranger Product Page'
+
+    return render_template('pink_ranger.html', title=title)
+    
+
+@app.route('/black_ranger')
+def black_ranger():
+    title = 'Black Ranger Product Page'
+
+    return render_template('black_ranger.html', title=title)
+
+
+@app.route('/yellow_ranger')
+def yellow_ranger():
+    title = 'Yellow Ranger Product Page'
+
+    return render_template('yellow_ranger.html', title=title)    
+
+@app.route('/power_rangers')
+def power_rangers():
+    title = 'Power Rangers Product Page'
+
+    return render_template('power_rangers.html', title=title)
+    
+
+@app.route('/rita_repulsa')
+def rita_repulsa():
+    title = 'Rita Repulsa Product Page'
+
+    return render_template('rita_repulsa.html', title=title)
+
 
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -84,6 +116,7 @@ def register():
     return render_template('register.html', title=title, form=register_form)
 
 
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     title= 'Login'
@@ -115,20 +148,88 @@ def logout():
     return redirect(url_for('index'))
 
 
-@app.route('/createpost', methods=['GET', 'POST'])
+
+
+@app.route('/addranger', methods=['GET', 'POST'])
 @login_required
-def createpost():
-    title = 'Create Post'
-    form = PostForm()
-    if form.validate_on_submit():
-        print('Hello')
-        title = form.title.data
-        content = form.content.data
-        new_post = Post(title, content, current_user.id)
-        db.session.add(new_post)
+def addranger():
+    ranger = Ranger()
+    if ranger.validate_on_submit():
+        color = ranger.color.data
+        skill = ranger.skill.data
+        description = ranger.description.data
+        image = ranger.image.data
+        price = ranger.price.data
+
+        new_ranger = Item(color, skill, description, image, price)
+        db.session.add(new_ranger)
         db.session.commit()
 
-        flash(f'The post {title} has been created.', 'primary')
+        flash('New Ranger Added')
         return redirect(url_for('index'))
+    return render_template('add_ranger.html', form=ranger)
 
-    return render_template('createpost.html', title=title, form=form)
+
+@app.route('/rangers')
+def rangers():
+    rangers = Item.query.all()
+    return render_template('a_rangers_display.html', rangers=rangers)
+
+@app.route('/ranger/<int:item_id>')
+def ranger_detail(item_id):
+    ranger = Item.query.get_or_404(item_id)
+
+    form = AddItem()
+
+    return render_template('a_ranger.html', ranger=ranger)
+
+
+def cart():
+    items = []
+    total_hours = 0
+    grand_total = 0
+    index = 0
+
+    for item in session['cart']:
+        item = Item.query.filter_by(id=item['id']).first()
+
+        hours = int(item['hours'])
+        total = hours * item.price
+        grand_total += total
+
+        total_hours += hours
+
+        items.append({'id': item.id, 'color': item.color, 'skill': item.skill, 'description': item.description, 'image': item.image, 'price': item.price, 'hours': hours, 'total': total, 'index': index })
+        index += 1
+    
+    return items, grand_total, total_hours
+
+   
+@app.route('/additem', methods=['POST'])
+@login_required
+def add_item():
+
+    if 'cart' not in session:
+        session['cart'] = []
+
+    form = AddItem()
+
+    if form.validate_on_submit():
+        
+        session['cart'].append({'id': form.id.data, 'hours': form.hours.data})
+        
+    return redirect(url_for('index'))
+
+    
+@app.route('/cart')
+@login_required
+def cart():
+    items, grand_total, total_hours = cart()   #tty query
+    return render_template('cart.html', items=items, grand_total=grand_total, total_hours=total_hours)
+
+@app.route('/remove-from-cart/<index>')
+def remove_from_cart(index):
+
+    del session['cart'][int(index)]
+
+    return redirect(url_for('cart'))

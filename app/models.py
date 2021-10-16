@@ -1,6 +1,5 @@
 from app import db, login_manager
 from werkzeug.security import generate_password_hash, check_password_hash
-from datetime import datetime
 from flask_login import UserMixin
 
 
@@ -13,7 +12,7 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(150), nullable=False, unique=True)
     email = db.Column(db.String(150), nullable=False, unique=True)
     password = db.Column(db.String(256), nullable=False)
-    posts = db.relationship('Post', backref='author', lazy=True)
+    items = db.relationship('Cart', backref='user', lazy=True)
 
     def __init__(self, username, email, password):
         self.username=username
@@ -23,30 +22,29 @@ class User(db.Model, UserMixin):
     def check_password(self, password):
         return check_password_hash(self.password, password)
 
-class Post(db.Model):
+
+
+class Item(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    title= db.Column(db.String(200))
-    content = db.Column(db.String(300))
-    date_created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow )
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    color = db.Column(db.String(50), nullable=False)
+    skill= db.Column(db.String(50), nullable=False)
+    description = db.Column(db.String(255), nullable=False)
+    image= db.Column(db.String(255), nullable=False)
+    price = db.Column(db.Float, nullable=False)
+    order =db.relationship('Cart', backref='item', lazy=True)
+    
 
-    def __init__(self, title, content, user_id):
-        self.title = title
-        self.content = content
-        self.user_id = user_id
+    def __init__(self, color, skill, description, image, price):
+        self.color = color
+        self.skill = skill
+        self.description = description
+        self.image = image
+        self.price = price
 
 
-class Phonebook(db.Model):
+class Cart(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    first_name = db.Column(db.String(150))
-    last_name =  db.Column(db.String(150))
-    phone_number = db.Column(db.String(150))
-    address = db.Column(db.String(300))
-
-    def __init__(self, first_name, last_name, phone_number, address):
-        self.first_name = first_name
-        self.last_name = last_name
-        self.phone_number = phone_number
-        self.address = address
-
-        
+    cart_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    item_id = db.Column(db.Integer, db.ForeignKey('item.id'))
+    hours = db.Column(db.Integer)
+    
