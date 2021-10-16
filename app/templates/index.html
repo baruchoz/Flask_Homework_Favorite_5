@@ -9,28 +9,9 @@
     <h3>Welcome {{ current_user.username }}!</h3>
 {% else %} 
     <h4>Welcome, please register using the link at the top if you would like to create your own posts</h4>
-{% endif %}    
-<br>
+{% endif %}     -->
 
-<h4>Your Blog!</h4>
-{% for p in posts %}
-    <br>
-    <div class="card bg-light text-dark">
-        <div class="card-header">
-        {{ p.title }}
-        </div>
-        <div class="card-body">
-            <blockquote class="blockquote mb-0">
-                <p>{{ p.content }}</p>
-                <footer class="blockquote-footer text-dark">{{ p.author.username }} on <cite title="Source Title">
-                    {{ p.date_created.strftime('%A, %b %d, %Y at %I:%M%p') }}
-                </cite></footer>
-            </blockquote>
-        </div>
-    </div>   
-{% endfor %} -->
 
-<br>
 <div class="row">
     <div class="col">
         <div class="card" style="width: 16rem;">
@@ -40,21 +21,22 @@
                 <p class="card-text text-dark"></p>
             </div>
             <div class="card-body">
-                <a href="/red_ranger" class="card-link">View Item</a>
+                <a href="/red_ranger" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#red_ranger">View item</a>
             </div>
+            
         </div>
     </div>
-    
+
     <div class="col">       
         <div class="card" style="width: 16rem;">
-            <img class="card-img-top" src="https://bbts1.azureedge.net/images/p/full/2020/12/81783ed4-4f7c-4de4-bc34-e0129618dcf5.jpg" alt="Card image cap">
-            <div class="card-body">
-                <h5 class="card-title text-dark">Blue Ranger</h5>
-                <p class="card-text text-dark"></p>
-            </div>
-            <div class="card-body">
-                <a href="/blue_ranger" class="card-link">View Item</a>
-            </div>
+                <img class="card-img-top" src="https://bbts1.azureedge.net/images/p/full/2020/12/81783ed4-4f7c-4de4-bc34-e0129618dcf5.jpg" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title text-dark">Blue Ranger</h5>
+                    <p class="card-text text-dark"></p>
+                </div>
+                <div class="card-body">
+                    <a href="/blue_ranger" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#blue_ranger">View Item</a>
+                </div>
         </div>
     </div>
         
@@ -66,7 +48,7 @@
                 <p class="card-text text-dark"></p>
             </div>
             <div class="card-body">
-                <a href="/green_ranger" class="card-link">View Item</a>
+                <a href="/green_ranger" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#green_ranger">View Item</a>
             </div>
         </div>
     </div>
@@ -78,7 +60,7 @@
                 <p class="card-text text-dark"></p>
             </div>
             <div class="card-body">
-                <a href="/pink_ranger" class="card-link">View Item</a>
+                <a href="/pink_ranger" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#pink_ranger">View Item</a>
             </div>
         </div>
     </div>
@@ -93,7 +75,7 @@
                 <p class="card-text text-dark"></p>
             </div>
             <div class="card-body">
-                <a href="/black_ranger" class="card-link">View Item</a>
+                <a href="/black_ranger" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#black_ranger">View Item</a>
             </div>
         </div>
     </div>
@@ -106,7 +88,7 @@
                 <p class="card-text text-dark"></p>
             </div>
             <div class="card-body">
-                <a href="/yellow_ranger" class="card-link">View Item</a>
+                <a href="/yellow_ranger" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#black_ranger">View Item</a>
             </div>
         </div>
     </div>
@@ -119,7 +101,7 @@
                 <p class="card-text text-dark"></p>
             </div>
             <div class="card-body">
-                <a href="/power_rangers" class="card-link">View Item</a>
+                <a href="/power_rangers" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#power_rangers">View Item</a>
             </div>
         </div>
     </div>
@@ -131,14 +113,190 @@
                 <p class="card-text text-dark"></p>
             </div>
             <div class="card-body">
-                <a href="/rita_repulsa" class="card-link">View Item</a>
+                <a href="/rita_repulsa" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#rita_repulsa">View Item</a>
             </div>
         </div>
     </div>
-    <br>
-    <div class="class pt-5">
-        <h1> Go Go Power Rangers!</h1> 
-    </div>   
-</div>  
+</div>
+<div class="class pt-5">
+    <h1> Go Go Power Rangers!</h1> 
+</div>   
 
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">{{ title }}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="red_ranger" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header text-dark">
+                <h5 class="modal-title" id="exampleModalLabel ">Red Ranger Services</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-dark">
+                <p>A master of the HTML and CSS domain! The Red Ranger can help you with any of your HTML/CSS needs.</p>
+            </div>
+            <div class="modal-body text-dark">
+                <p>Price: $100/hour</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="blue_ranger" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header text-dark">
+                <h5 class="modal-title" id="exampleModalLabel ">Blue Ranger Services</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-dark">
+                <p> A master of the Python and Flask domain! The Blue Ranger can help you with any of your Python or Flask needs. </p>
+            </div>
+            <div class="modal-body text-dark">
+                <p>Price: $100/hour</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="green_ranger" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header text-dark">
+                <h5 class="modal-title" id="exampleModalLabel ">Green Ranger Services</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-dark">
+                <p> A master of the SQL and Postgresql domain! The Green Ranger can help you with any of your SQL or Postgresql needs.</p>
+            </div>
+            <div class="modal-body text-dark">
+                <p>Price: $100/hour</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="pink_ranger" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header text-dark">
+                <h5 class="modal-title" id="exampleModalLabel ">Pink Ranger Services</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-dark">
+                <p> A master of the Javascript and React domain! The Pink Ranger can help you with any of your Javascript or React needs.</p>
+            </div>
+            <div class="modal-body text-dark">
+                <p>Price: $100/hour</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="black_ranger" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header text-dark">
+                <h5 class="modal-title" id="exampleModalLabel ">Black Ranger Services</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-dark">
+                <p> A master of the Java domain! The Black Ranger can help you with any of your Java needs.</p>
+            </div>
+            <div class="modal-body text-dark">
+                <p>Price: $100/hour</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="yellow_ranger" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header text-dark">
+                <h5 class="modal-title" id="exampleModalLabel ">Yellow Ranger Services</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-dark">
+                <p> A master of the C# domain! The Yellow Ranger can help you with any of your C# needs.</p>
+            </div>
+            <div class="modal-body text-dark">
+                <p>Price: $100/hour</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="power_rangers" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header text-dark">
+                <h5 class="modal-title" id="exampleModalLabel ">Power Ranger Services</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-dark">
+                <p> Together they can help you develop your wildest app dreams! </p>
+            </div>
+            <div class="modal-body text-dark">
+                <p>Price: $100/hour</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="rita_repulsa" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header text-dark">
+                <h5 class="modal-title" id="exampleModalLabel ">Rita Repulsa</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-dark">
+                <p> Here for all your "Ethical" Hacking needs!</p>
+            </div>
+            <div class="modal-body text-dark">
+                <p>Price: $100/hour</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
