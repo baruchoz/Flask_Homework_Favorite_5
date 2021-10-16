@@ -1,56 +1,119 @@
 from app import app, db
 from flask import render_template, redirect, url_for, flash
 from flask_login import login_user ,logout_user, current_user, login_required
-from app.forms import UserInfoForm, PostForm, LoginForm, PhonebookForm
-from app.models import User, Post, Phonebook
+from app.forms import UserInfoForm, LoginForm
+from app.models import User
 
 
 @app.route('/') 
 def index():
-    title = 'Blog Homepage'
-    posts = Post.query.all()
+    title = 'Power Programmer Home'
+    # posts = Post.query.all()
     
-    return render_template('index.html', title=title, posts=posts)
+    return render_template('index.html', title=title )
 
 
-@app.route('/favorite_5') 
-def artists():
-    title = 'Favorite 5'
-    artists = ['Odesza', 'Flume', 'Bonobo', 'Porter Robinson', 'Louis The Child']
-    return render_template('favorite_5.html', title=title, artists=artists)
+@app.route('/cart')
+@login_required 
+def cart():
+    title = 'Cart'
+    
+    return render_template('cart.html', title=title)
 
 
-@app.route('/phonebook')
-@login_required
-def phonebook():
-    title = 'Phonebook'
-    phonebooks = Phonebook.query.all()
+@app.route('/my_account') 
+@login_required 
+def my_account():     
+    title = 'My Account'
 
-    return render_template('phonebook.html',title=title, phonebooks=phonebooks)
+    return render_template('my_account.html', title=title)
 
 
-@app.route('/register_phone_number', methods=['GET', 'POST'])
-@login_required
-def Register_Phone_Number():
-    title = 'Register Phonebook'
-    register_phone_form = PhonebookForm()
-    if register_phone_form.validate_on_submit():
-        first_name = register_phone_form.first_name.data
-        last_name = register_phone_form.last_name.data
-        phone_number = register_phone_form.phone_number.data
-        address = register_phone_form.address.data
-        print(first_name, last_name, phone_number, address)
+@app.route('/red_ranger')
+def red_ranger():
+    title = 'Red Ranger Product Page'
 
-        new_phonebook = Phonebook(first_name, last_name, phone_number, address)
+    return render_template('red_ranger.html', title=title)
+
+
+@app.route('/blue_ranger')
+def blue_ranger():
+    title = 'Blue Ranger Product Page'
+
+    return render_template('blue_ranger.html', title=title)
+
+
+@app.route('/green_ranger')
+def green_ranger():
+    title = 'Green Ranger Product Page'
+
+    return render_template('green_ranger.html', title=title)    
+
+@app.route('/pink_ranger')
+def pink_ranger():
+    title = 'Pink Ranger Product Page'
+
+    return render_template('pink_ranger.html', title=title)
+    
+
+@app.route('/black_ranger')
+def black_ranger():
+    title = 'Black Ranger Product Page'
+
+    return render_template('black_ranger.html', title=title)
+
+
+@app.route('/yellow_ranger')
+def yellow_ranger():
+    title = 'Yellow Ranger Product Page'
+
+    return render_template('yellow_ranger.html', title=title)    
+
+@app.route('/power_rangers')
+def power_rangers():
+    title = 'Power Rangers Product Page'
+
+    return render_template('power_rangers.html', title=title)
+    
+
+@app.route('/rita_repulsa')
+def rita_repulsa():
+    title = 'Rita Repulsa Product Page'
+
+    return render_template('rita_repulsa.html', title=title)
+
+
+# @app.route('/phonebook')
+# @login_required
+# def phonebook():
+#     title = 'Phonebook'
+#     phonebooks = Phonebook.query.all()
+
+#     return render_template('phonebook.html',title=title, phonebooks=phonebooks)
+
+
+# @app.route('/register_phone_number', methods=['GET', 'POST'])
+# @login_required
+# def Register_Phone_Number():
+#     title = 'Register Phonebook'
+#     register_phone_form = PhonebookForm()
+#     if register_phone_form.validate_on_submit():
+#         first_name = register_phone_form.first_name.data
+#         last_name = register_phone_form.last_name.data
+#         phone_number = register_phone_form.phone_number.data
+#         address = register_phone_form.address.data
+#         print(first_name, last_name, phone_number, address)
+
+#         new_phonebook = Phonebook(first_name, last_name, phone_number, address)
         
-        db.session.add(new_phonebook)
-        db.session.commit()
+#         db.session.add(new_phonebook)
+#         db.session.commit()
 
-        flash(f'Thank you {first_name}, you have successfully registered your info in the phonebook!', 'success')
-        # Redirecting to the home page
-        return redirect(url_for('phonebook'))
+#         flash(f'Thank you {first_name}, you have successfully registered your info in the phonebook!', 'success')
+#         # Redirecting to the home page
+#         return redirect(url_for('phonebook'))
 
-    return render_template('register_phone_number.html', title=title, phonebook_form=register_phone_form)
+#     return render_template('register_phone_number.html', title=title, phonebook_form=register_phone_form)
 
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -115,20 +178,20 @@ def logout():
     return redirect(url_for('index'))
 
 
-@app.route('/createpost', methods=['GET', 'POST'])
-@login_required
-def createpost():
-    title = 'Create Post'
-    form = PostForm()
-    if form.validate_on_submit():
-        print('Hello')
-        title = form.title.data
-        content = form.content.data
-        new_post = Post(title, content, current_user.id)
-        db.session.add(new_post)
-        db.session.commit()
+# @app.route('/createpost', methods=['GET', 'POST'])
+# @login_required
+# def createpost():
+#     title = 'Create Post'
+#     form = PostForm()
+#     if form.validate_on_submit():
+#         print('Hello')
+#         title = form.title.data
+#         content = form.content.data
+#         new_post = Post(title, content, current_user.id)
+#         db.session.add(new_post)
+#         db.session.commit()
 
-        flash(f'The post {title} has been created.', 'primary')
-        return redirect(url_for('index'))
+#         flash(f'The post {title} has been created.', 'primary')
+#         return redirect(url_for('index'))
 
-    return render_template('createpost.html', title=title, form=form)
+#     return render_template('createpost.html', title=title, form=form)
