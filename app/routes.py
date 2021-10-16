@@ -1,4 +1,3 @@
-from sqlalchemy.orm import session
 from app import app, db
 from flask import render_template, redirect, url_for, flash, session
 from flask_login import login_user ,logout_user, current_user, login_required
@@ -8,18 +7,9 @@ from app.models import User, Item, Cart
 
 @app.route('/') 
 def index():
-    title = 'Power Programmer Home'
-    # posts = Post.query.all()
+    title = 'Power Programmers Home'
     
     return render_template('index.html', title=title )
-
-
-# @app.route('/cart')
-# @login_required 
-# def cart():
-    title = 'Cart'
-    
-    return render_template('cart.html', title=title)
 
 
 @app.route('/my_account') 
@@ -28,61 +18,6 @@ def my_account():
     title = 'My Account'
 
     return render_template('my_account.html', title=title)
-
-
-@app.route('/red_ranger')
-def red_ranger():
-    title = 'Red Ranger Product Page'
-
-    return render_template('red_ranger.html', title=title)
-
-
-@app.route('/blue_ranger')
-def blue_ranger():
-    title = 'Blue Ranger Product Page'
-
-    return render_template('blue_ranger.html', title=title)
-
-
-@app.route('/green_ranger')
-def green_ranger():
-    title = 'Green Ranger Product Page'
-
-    return render_template('green_ranger.html', title=title)    
-
-@app.route('/pink_ranger')
-def pink_ranger():
-    title = 'Pink Ranger Product Page'
-
-    return render_template('pink_ranger.html', title=title)
-    
-
-@app.route('/black_ranger')
-def black_ranger():
-    title = 'Black Ranger Product Page'
-
-    return render_template('black_ranger.html', title=title)
-
-
-@app.route('/yellow_ranger')
-def yellow_ranger():
-    title = 'Yellow Ranger Product Page'
-
-    return render_template('yellow_ranger.html', title=title)    
-
-@app.route('/power_rangers')
-def power_rangers():
-    title = 'Power Rangers Product Page'
-
-    return render_template('power_rangers.html', title=title)
-    
-
-@app.route('/rita_repulsa')
-def rita_repulsa():
-    title = 'Rita Repulsa Product Page'
-
-    return render_template('rita_repulsa.html', title=title)
-
 
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -173,15 +108,20 @@ def addranger():
 @app.route('/rangers')
 def rangers():
     rangers = Item.query.all()
-    return render_template('a_rangers_display.html', rangers=rangers)
+    return render_template('rangers_display.html', rangers=rangers)
 
-@app.route('/ranger/<int:item_id>')
-def ranger_detail(item_id):
+@app.route('/rangers/<item_id>')
+def view_ranger(item_id):
     ranger = Item.query.get_or_404(item_id)
 
-    form = AddItem()
+    # form = AddItem()
 
-    return render_template('a_ranger.html', ranger=ranger)
+    return render_template('view_ranger.html', ranger=ranger)
+
+@app.route('/ranger_detail/<item_id>')
+def ranger_detail(item_id):
+    ranger = Item.query.get_or_404(item_id)
+    return render_template('view_ranger.html', ranger=ranger)
 
 
 def cart():
