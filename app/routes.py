@@ -7,19 +7,22 @@ from app.models import User
 
 @app.route('/') 
 def index():
-    title = 'Power Programmer Home'
-    # posts = Post.query.all()
-    
-    return render_template('index.html', title=title )
+    return render_template('index.html', title='Power Programmer Home' )
 
 
 @app.route('/cart')
 @login_required 
 def cart():
     title = 'Cart'
+    # carts = Cart.query.all() ST
+    return render_template('cart.html', title=title)
+    
+@app.route('/add-to-cart')
+@login_required
+def addcart():
+    title = 'Add to Cart'
     
     return render_template('cart.html', title=title)
-
 
 @app.route('/my_account') 
 @login_required 
@@ -31,54 +34,48 @@ def my_account():
 
 @app.route('/red_ranger')
 def red_ranger():
-    title = 'Red Ranger Product Page'
-
-    return render_template('red_ranger.html', title=title)
+    title = 'Red Ranger'
+    return render_template('red_ranger.html', title=title, headline='Red Ranger Product Page')
 
 
 @app.route('/blue_ranger')
 def blue_ranger():
-    title = 'Blue Ranger Product Page'
-
-    return render_template('blue_ranger.html', title=title)
+    title = 'Blue Ranger'
+    return render_template('blue_ranger.html', title=title, headline='Blue Ranger Product Page')
 
 
 @app.route('/green_ranger')
 def green_ranger():
-    title = 'Green Ranger Product Page'
-
-    return render_template('green_ranger.html', title=title)    
+    title = 'Green Ranger'
+    return render_template('green_ranger.html', title=title, headline='Green Ranger Product Page')    
 
 @app.route('/pink_ranger')
 def pink_ranger():
-    title = 'Pink Ranger Product Page'
-
-    return render_template('pink_ranger.html', title=title)
+    title = 'Pink Ranger'
+    return render_template('pink_ranger.html', title=title, headline='Pink Ranger Product Page')
     
 
 @app.route('/black_ranger')
 def black_ranger():
-    title = 'Black Ranger Product Page'
-
-    return render_template('black_ranger.html', title=title)
+    title = 'Black Ranger'
+    return render_template('black_ranger.html', title=title, headline='Black Ranger Product Page')
 
 
 @app.route('/yellow_ranger')
 def yellow_ranger():
-    title = 'Yellow Ranger Product Page'
-
-    return render_template('yellow_ranger.html', title=title)    
+    title = 'Yellow Ranger'
+    return render_template('yellow_ranger.html', title=title, headline='Yellow Ranger Product Page')    
 
 @app.route('/power_rangers')
 def power_rangers():
-    title = 'Power Rangers Product Page'
+    title = 'Power Rangers'
 
     return render_template('power_rangers.html', title=title)
     
 
 @app.route('/rita_repulsa')
 def rita_repulsa():
-    title = 'Rita Repulsa Product Page'
+    title = 'Rita Repulsa'
 
     return render_template('rita_repulsa.html', title=title)
 

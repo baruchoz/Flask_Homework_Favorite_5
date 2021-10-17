@@ -28,9 +28,10 @@ class User(db.Model, UserMixin):
 #     item = db.Column(db.String(150), nullable=False, unique=True)
 #     price = db.Column(db.Numeric(6,2), nullable=False, unique=True) 
 
-#     def __init__(self, item, total):
+#     def __init__(self, id, item, total):
 #         self.item=item
 #         self.total=total
+            # self.id = id
 
 
 
